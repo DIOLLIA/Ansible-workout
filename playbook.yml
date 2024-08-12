@@ -1,0 +1,40 @@
+- name: Simple Playbook cp file
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Copy file test to /usr/ansiproject with permissions
+    ansible.builtin.copy:
+      src: /./usr/test
+      dest: /./usr/ansiproject/files/
+      mode: '0644'
+
+- name: Simple Playbook add git
+  hosts: server-1
+  become: yes
+
+  tasks:
+  - name: Install specific version of Git
+    apk:
+      name: git=2.20.4-r0
+      state: present
+ 
+  - name: Check if Git is installed
+    command: git --version
+    register: git_version
+
+  - name: Parse Git version
+    set_fact:
+      installed_git_version: "{{ git_version.stdout.split(' ')[2] }}"
+    when: git_version.rc == 0
+
+  - name: Ensure Git installed and has v2.20.4 
+    apt:
+      name: git=2.20.4 
+      state: present
+    when: installed_git_version is not defined or installed_git_version != '2.20.4'
+
+  - name: Fail if Git version is not 2.120.0
+    fail:
+      msg: "Installed Git version is {{ installed_git_version }}. Required version is 2.120.0."
+    when: installed_git_version is defined and installed_git_version != '2.120.4'

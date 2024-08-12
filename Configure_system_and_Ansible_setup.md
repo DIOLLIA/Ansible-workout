@@ -118,7 +118,7 @@ From the wsl use next commands to install ansible:
 Check that ansible is installed by
 `ansible --version`
 
-Check the config file directory path. By default Ansible will but configuration uder /etc/ansible/ansible.cfg
+Check the config file directory path. By default Ansible will but configuration under /etc/ansible/ansible.cfg
 
 We will disable keys check for SSH connection.
 Open the file and make sure the parameter `host_key_checking` has `False` value
@@ -158,6 +158,6 @@ Run module ping for Ansible, to make sure that connection is established success
 `ansible all -i hosts.yml -m ping`
 
 As the final result you should see something like
-![Result](images/ansible_1_result.png)
+![Result](workoutData/1_ansible_result.png)
 that confirms connection was established
 
