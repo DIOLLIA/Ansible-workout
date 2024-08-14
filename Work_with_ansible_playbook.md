@@ -53,7 +53,7 @@ The simple playbook file could look like
 ```
 All these info you will see after you execute it. 
 
-The exact file with more tasks you can find in workoutData/2_ansiblePlaybook
+The exact file with more tasks you can find in [playbook](workoutData/2_ansiblePlaybook)
 
 Apply playbook with command:
 
